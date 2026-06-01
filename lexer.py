@@ -6,9 +6,9 @@ def tokenize(code):
     for word in code.split():
         if word.isdigit():
             tokens.append(('digit',word))
-        if word in KEYWORDS:
+        elif word in KEYWORDS:
             tokens.append(('keyword',word))
-        if word in OPERATORS:
+        elif word in OPERATORS:
             tokens.append(('operator',word))
         else:
             tokens.append(('identifier',word))
