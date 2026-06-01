@@ -13,3 +13,6 @@ def tokenize(code):
         else:
             tokens.append(('identifier',word))
     return tokens
+
+code = 'if x > 5 print lol'
+print(tokenize(code))
