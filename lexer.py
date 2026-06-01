@@ -15,12 +15,12 @@ def tokenize(code):
             for i in range(len(word)):
                 if word[i] in OPERATORS:
                     j=i
-                    tokens.append(tokenize(word[:i]))
+                    tokens.extend(tokenize(word[:i]))
                     tokens.append(('operator',word[i]))
             if j==0:
                 tokens.append(('identifier',word))
             else:
-                tokens.append(tokenize(word[j+1:]))
+                tokens.extend(tokenize(word[j+1:]))
 
     return tokens
 
