@@ -17,16 +17,23 @@ def flush(buffer, tokens):
 def tokenize(code):
     tokens = []
     cumcursor=[]
-    for char in code:
-        if char==' ':
+    i=0
+    while i <len(code):
+        if code[i]==' ':
             flush(cumcursor, tokens)
             cumcursor=[]
-        elif char in OPERATORS:
+        elif code[i] in OPERATORS:
             flush(cumcursor, tokens)
             cumcursor=[]
-            tokens.append(('operator',char))
+            if code[i+1] in OPERATORS:
+                tokens.append(('operator',code[i]+code[i+1]))
+                i+=1
+            else:
+                tokens.append(('operator',code[i]))
         else:
-            cumcursor.append(char)
+            cumcursor.append(code[i])
+        i+=1
+
     flush(cumcursor, tokens) 
     return tokens
 
