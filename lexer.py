@@ -1,5 +1,5 @@
 KEYWORDS = ['if', 'print', 'while', 'else']
-OPERATORS = ['>', '<', '=', '+', '-', '*', '/']
+OPERATORS = ['>', '<', '=', '+', '-', '*', '/','>=','<=','==','!=']
 
 def tokenize(code):
     tokens = []
@@ -11,8 +11,18 @@ def tokenize(code):
         elif word in OPERATORS:
             tokens.append(('operator',word))
         else:
-            tokens.append(('identifier',word))
+            j=0
+            for i in range(len(word)):
+                if word[i] in OPERATORS:
+                    j=i
+                    tokens.append(tokenize(word[:i]))
+                    tokens.append(('operator',word[i]))
+            if j==0:
+                tokens.append(('identifier',word))
+            else:
+                tokens.append(tokenize(word[j+1:]))
+
     return tokens
 
-code = 'if x > 5 print lol'
+code = 'if x>5 print lol'
 print(tokenize(code))
