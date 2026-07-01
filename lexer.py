@@ -1,6 +1,6 @@
 KEYWORDS = ['if', 'print', 'while', 'else']
 OPERATORS = ['>', '<', '=', '+', '-', '*', '/','>=','<=','==','!=']
-
+PUNCTUATION = [':']
 
 def flush(buffer, tokens):
     word = ''.join(buffer)
