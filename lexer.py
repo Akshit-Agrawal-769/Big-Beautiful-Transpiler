@@ -1,6 +1,6 @@
 KEYWORDS = ['if', 'print', 'while', 'else']
 OPERATORS = ['>', '<', '=', '+', '-', '*', '/','>=','<=','==','!=']
-PUNCTUATION = [':']
+PUNCTUATION = [':','(',')']
 
 def flush(buffer, tokens):
     word = ''.join(buffer)
@@ -30,6 +30,10 @@ def tokenize(code):
                 i+=1
             else:
                 tokens.append(('operator',code[i]))
+        elif code[i] in PUNCTUATION:
+            flush(cumcursor, tokens)
+            cumcursor=[]
+            tokens.append(('punctuation',code[i]))
         else:
             cumcursor.append(code[i])
         i+=1
@@ -37,5 +41,5 @@ def tokenize(code):
     flush(cumcursor, tokens) 
     return tokens
 
-code = 'if x>=5 print lol'
+code = 'if x>=5:print(x)'
 print(tokenize(code))
